@@ -7,11 +7,11 @@ import time
 import json
 
 from sort_cars import find_prices
-
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-service = Service('D:/chromedriver-win32/chromedriver.exe')
-driver = webdriver.Chrome(service=service, options=chrome_options)
+#
+# chrome_options = Options()
+# chrome_options.add_argument("--headless")
+# service = Service('D:/chromedriver-win32/chromedriver.exe')
+# driver = webdriver.Chrome(service=service, options=chrome_options)
 
 CAR_SELECTOR = "div.AdPhoto_wrapper__gAOIH"
 TITLE_SELECTOR = "a.AdPhoto_info__link__OwhY6"
@@ -28,6 +28,11 @@ def write_data_json(data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 def parsing_cars():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    service = Service('D:/chromedriver-win32/chromedriver.exe')
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+
     try:
         page = 1
         while True:
@@ -77,4 +82,4 @@ def parsing_cars():
 
         write_data_json(result)
 
-parsing_cars()
+
