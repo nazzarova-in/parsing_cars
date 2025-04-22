@@ -52,14 +52,20 @@ def parsing_cars():
                     price = car.find_element(By.CSS_SELECTOR, PRICE_SELECTOR).text
 
                     if title and price:
-                        year = title.split(',')[1].strip() if ',' in title else None
-                        if year == '2007 г.':
+                        original_title = title
+                        split_string = original_title.split(',')
+
+                        title = split_string[0]
+                        year = split_string[1].strip() if len(split_string) > 1 else None
+
+                        if title == 'Renault Megane' and year == '2007 г.':
                             all_cars.append({
-                                "title": title.split(',')[0],
+                                "title": title,
                                 "year": year,
                                 "price": price,
                             })
-                    cars_on_page += 1
+                        cars_on_page += 1
+
                 except NoSuchElementException:
                     continue
 
@@ -81,5 +87,4 @@ def parsing_cars():
         result = find_prices(all_cars)
 
         write_data_json(result)
-
 
