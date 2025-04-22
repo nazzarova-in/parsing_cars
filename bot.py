@@ -1,7 +1,6 @@
 import json
-import requests
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes
+from telegram.ext import Application, CommandHandler,  ContextTypes
 from parsing_cars import parsing_cars
 import os
 from dotenv import load_dotenv
@@ -34,9 +33,13 @@ async def get_prices(update:Update, context:ContextTypes.DEFAULT_TYPE ) -> None:
         prices = json.load(f)
 
     message = (
-        f" min_price : {prices['min_price']}\n"
-        f" max_price : {prices['max_price']}\n"
-        f" average_price: {prices['average_price']}\n"
+        f" Mинимальная цена в евро  : {prices['min_price']}\n"
+        f" Link: { prices['min_link']}\n\n"
+        
+        f" Mаксимальная цена в евро : {prices['max_price']}\n"
+        f" Link: { prices['max_link']}\n\n"
+        
+        f" Cредняя цена в евро : {prices['average_price']}\n"
     )
 
     await  update.message.reply_text(message)

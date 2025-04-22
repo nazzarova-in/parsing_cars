@@ -1,5 +1,7 @@
 {
-  "min_price": 1000,
-  "max_price": 5000,
-  "average_price": 3305
+  "min_price": 3800,
+  "min_link": "https://999.md/ru/100268186",
+  "max_price": 8850,
+  "max_link": "https://999.md/ru/100048995",
+  "average_price": 5510
 }
