@@ -48,7 +48,9 @@ def parsing_cars():
             cars_on_page = 0
             for car in driver.find_elements(By.CSS_SELECTOR, CAR_SELECTOR[3:]):
                 try:
-                    title = car.find_element(By.CSS_SELECTOR, TITLE_SELECTOR).text
+                    title_elem = car.find_element(By.CSS_SELECTOR, TITLE_SELECTOR)
+                    title = title_elem.text
+                    link = title_elem.get_attribute('href')
                     price = car.find_element(By.CSS_SELECTOR, PRICE_SELECTOR).text
 
                     if title and price:
@@ -63,8 +65,10 @@ def parsing_cars():
                                 "title": title,
                                 "year": year,
                                 "price": price,
+                                "link": link,
                             })
                         cars_on_page += 1
+
 
                 except NoSuchElementException:
                     continue
@@ -83,7 +87,6 @@ def parsing_cars():
     finally:
         driver.quit()
 
-        print(find_prices(all_cars))
         result = find_prices(all_cars)
 
         write_data_json(result)
